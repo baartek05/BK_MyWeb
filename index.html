@@ -1,48 +1,3 @@
-
-Claude finished the response
-
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Portfolio</title> <!--nazwa/tytuł strony--> <link rel="stylesheet" href="style
-
-pasted
-
-wykonaj mega profesjonalna strone na podstawie tego. jestem bartosz kareł
-
-08:29
-
-Viewed a file, created a file, read a file
-Viewed a file, created a file, read a file
-Gotowe — oto Twoje profesjonalne portfolio. Oto co zostało zrobione:
-
-Design: Elegancki, ciemny motyw z akcentami złota. Styl editorial/luxury — typografia łączy DM Serif Display (nagłówki) z DM Sans (treść) i Space Mono (detale). Niestandardowy kursor, animacje wejścia przy scrollowaniu.
-
-Sekcje:
-
-Hero — pełnoekranowy z wielkim imieniem, subtytułem i przyciskami CTA
-O mnie — miejsce na zdjęcie, zakładki Umiejętności / Doświadczenie / Edukacja, statystyki
-Usługi — 3 karty z ikonami i efektem hover
-Portfolio — siatka projektów z overlayem po najechaniu
-Kontakt — dane kontaktowe + formularz
-Funkcje:
-
-Przełącznik ciemny/jasny motyw
-Animowane odsłanianie elementów przy scrollu
-Responsywność na mobile
-Podłączenie Google Sheets pod formularz (wstaw swój scriptURL)
-Do uzupełnienia: zdjęcie profilowe, numery telefonu, e-mail, linki do projektów i CV — wszystkie miejsca są oznaczone w kodzie.
-
-
-Index
-Code · HTML 
-
-
-
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-
-
-raw
-Index · HTML
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -54,7 +9,7 @@ Index · HTML
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
   :root {
     --bg: #0a0a0a;
     --bg2: #111111;
@@ -69,9 +24,9 @@ Index · HTML
     --gold: #c9a96e;
     --gold2: #e8c98e;
   }
- 
+
   html { scroll-behavior: smooth; }
- 
+
   body {
     background: var(--bg);
     color: var(--text);
@@ -80,7 +35,7 @@ Index · HTML
     overflow-x: hidden;
     cursor: none;
   }
- 
+
   /* Custom cursor */
   .cursor {
     position: fixed;
@@ -104,7 +59,7 @@ Index · HTML
   }
   body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 14px; height: 14px; background: var(--gold2); }
   body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 50px; height: 50px; border-color: var(--gold2); }
- 
+
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
@@ -122,7 +77,7 @@ Index · HTML
     transition: backdrop-filter 0.4s;
   }
   nav.scrolled::after { backdrop-filter: blur(20px); background: rgba(10,10,10,0.6); }
- 
+
   .nav-logo {
     font-family: 'DM Serif Display', serif;
     font-size: 1.4rem;
@@ -131,7 +86,7 @@ Index · HTML
     text-decoration: none;
   }
   .nav-logo span { color: var(--gold); }
- 
+
   .nav-links { display: flex; gap: 3rem; list-style: none; }
   .nav-links a {
     font-size: 0.8rem;
@@ -143,7 +98,7 @@ Index · HTML
     font-weight: 400;
   }
   .nav-links a:hover { color: var(--gold); }
- 
+
   .nav-right { display: flex; align-items: center; gap: 1.5rem; }
   .theme-btn {
     background: none; border: 1px solid var(--line2);
@@ -155,7 +110,7 @@ Index · HTML
     font-family: 'DM Sans', sans-serif;
   }
   .theme-btn:hover { border-color: var(--gold); color: var(--gold); }
- 
+
   /* HERO */
   #hero {
     min-height: 100vh;
@@ -164,20 +119,20 @@ Index · HTML
     position: relative;
     overflow: hidden;
   }
- 
+
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
     background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(201,169,110,0.06) 0%, transparent 60%),
                 radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 50%);
   }
- 
+
   .hero-grid {
     position: absolute; inset: 0; z-index: 0; opacity: 0.03;
     background-image: linear-gradient(var(--text) 1px, transparent 1px),
                       linear-gradient(90deg, var(--text) 1px, transparent 1px);
     background-size: 80px 80px;
   }
- 
+
   .hero-num {
     position: absolute; right: 4rem; top: 50%;
     transform: translateY(-50%);
@@ -188,7 +143,7 @@ Index · HTML
     user-select: none;
     z-index: 0;
   }
- 
+
   .hero-tag {
     font-size: 0.75rem; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--gold);
@@ -197,7 +152,7 @@ Index · HTML
     position: relative; z-index: 1;
     opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
   }
- 
+
   .hero-title {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(4rem, 10vw, 9rem);
@@ -210,7 +165,7 @@ Index · HTML
     color: var(--gold);
     display: block;
   }
- 
+
   .hero-sub {
     max-width: 420px;
     font-size: 1rem; line-height: 1.7;
@@ -219,14 +174,14 @@ Index · HTML
     position: relative; z-index: 1;
     opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
   }
- 
+
   .hero-cta {
     display: flex; align-items: center; gap: 2rem;
     margin-top: 3.5rem;
     position: relative; z-index: 1;
     opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
   }
- 
+
   .btn-primary {
     display: inline-flex; align-items: center; gap: 0.75rem;
     background: var(--gold);
@@ -239,7 +194,7 @@ Index · HTML
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   }
   .btn-primary:hover { background: var(--gold2); transform: translate(-2px, -2px); }
- 
+
   .btn-ghost {
     font-size: 0.85rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--text2);
@@ -250,7 +205,7 @@ Index · HTML
   .btn-ghost::after { content: '→'; transition: transform 0.3s; }
   .btn-ghost:hover { color: var(--text); }
   .btn-ghost:hover::after { transform: translateX(4px); }
- 
+
   .hero-scroll {
     position: absolute; right: 4rem; bottom: 3rem;
     display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
@@ -267,7 +222,7 @@ Index · HTML
     background: linear-gradient(var(--gold), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
- 
+
   /* DIVIDER */
   .section-divider {
     display: flex; align-items: center; gap: 2rem;
@@ -282,16 +237,16 @@ Index · HTML
     content: ''; flex: 1; height: 1px;
     background: var(--line);
   }
- 
+
   /* ABOUT */
   #about { padding: 10rem 4rem; position: relative; }
- 
+
   .about-inner {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 8rem; align-items: start;
     max-width: 1200px; margin: 0 auto;
   }
- 
+
   .about-img-wrap {
     position: relative;
   }
@@ -309,7 +264,7 @@ Index · HTML
   }
   .about-img-placeholder svg { opacity: 0.3; }
   .about-img-placeholder span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; }
- 
+
   .about-img-tag {
     position: absolute; bottom: -1.5rem; right: -1.5rem;
     background: var(--gold);
@@ -319,28 +274,28 @@ Index · HTML
     font-size: 0.7rem;
     clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
   }
- 
+
   .about-content { padding-top: 1rem; }
- 
+
   .section-label {
     font-size: 0.7rem; letter-spacing: 0.25em;
     text-transform: uppercase; color: var(--gold);
     font-family: 'Space Mono', monospace;
     margin-bottom: 1.5rem; display: block;
   }
- 
+
   .section-title {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
     line-height: 1.1; margin-bottom: 2rem;
   }
   .section-title em { font-style: italic; color: var(--gold); }
- 
+
   .about-text {
     font-size: 1rem; line-height: 1.8;
     color: var(--text2); margin-bottom: 3rem;
   }
- 
+
   /* Tabs */
   .tabs { margin-top: 2.5rem; }
   .tab-nav {
@@ -364,10 +319,10 @@ Index · HTML
   .tab-btn.active { color: var(--gold); }
   .tab-btn.active::after { transform: scaleX(1); }
   .tab-btn:hover { color: var(--text2); }
- 
+
   .tab-pane { display: none; }
   .tab-pane.active { display: block; animation: fadeUp 0.4s forwards; }
- 
+
   .tab-pane ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
   .tab-pane li { padding-left: 1.5rem; border-left: 2px solid var(--line2); transition: border-color 0.3s; }
   .tab-pane li:hover { border-left-color: var(--gold); }
@@ -378,7 +333,7 @@ Index · HTML
   }
   .tab-pane li .li-text { font-size: 0.95rem; color: var(--text2); line-height: 1.6; }
   .tab-pane li .li-sub { font-size: 0.85rem; color: var(--text3); margin-top: 0.25rem; }
- 
+
   /* STATS */
   .stats-row {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -401,7 +356,7 @@ Index · HTML
     text-transform: uppercase; color: var(--text3);
     margin-top: 0.5rem; display: block;
   }
- 
+
   /* SERVICES */
   #services {
     padding: 10rem 4rem;
@@ -413,19 +368,19 @@ Index · HTML
     position: absolute; top: 0; left: 0; right: 0;
     height: 1px; background: var(--line);
   }
- 
+
   .services-header {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 4rem; align-items: end;
     max-width: 1200px; margin: 0 auto 6rem;
   }
   .services-intro { font-size: 1rem; line-height: 1.8; color: var(--text2); }
- 
+
   .services-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 2px; max-width: 1200px; margin: 0 auto;
   }
- 
+
   .service-card {
     background: var(--bg);
     padding: 3rem 2.5rem;
@@ -444,13 +399,13 @@ Index · HTML
   }
   .service-card:hover { background: var(--bg3); border-color: var(--line2); }
   .service-card:hover::before { transform: scaleX(1); }
- 
+
   .service-num {
     font-family: 'Space Mono', monospace;
     font-size: 0.7rem; color: var(--text3);
     letter-spacing: 0.1em; margin-bottom: 2rem;
   }
- 
+
   .service-icon {
     width: 52px; height: 52px;
     border: 1px solid var(--line2);
@@ -459,25 +414,25 @@ Index · HTML
     transition: border-color 0.3s, background 0.3s;
   }
   .service-card:hover .service-icon { border-color: var(--gold); background: rgba(201,169,110,0.05); }
- 
+
   .service-icon svg { opacity: 0.7; transition: opacity 0.3s; }
   .service-card:hover .service-icon svg { opacity: 1; }
- 
+
   .service-title {
     font-family: 'DM Serif Display', serif;
     font-size: 1.5rem; margin-bottom: 1rem;
     line-height: 1.2;
   }
   .service-text { font-size: 0.9rem; line-height: 1.7; color: var(--text2); }
- 
+
   /* PORTFOLIO */
   #portfolio { padding: 10rem 4rem; }
- 
+
   .portfolio-header {
     display: flex; align-items: flex-end; justify-content: space-between;
     max-width: 1200px; margin: 0 auto 5rem;
   }
- 
+
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -485,7 +440,7 @@ Index · HTML
     gap: 2px;
     max-width: 1200px; margin: 0 auto;
   }
- 
+
   .work-item {
     position: relative; overflow: hidden;
     background: var(--bg3);
@@ -495,7 +450,7 @@ Index · HTML
     grid-column: 1 / 3;
     grid-row: 1 / 2;
   }
- 
+
   .work-img {
     width: 100%; aspect-ratio: 16/9;
     background: var(--bg3);
@@ -510,9 +465,9 @@ Index · HTML
     color: var(--text3);
   }
   .work-img-placeholder svg { opacity: 0.2; }
- 
+
   .work-item:hover .work-img { transform: scale(1.04); }
- 
+
   .work-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(transparent 40%, rgba(10,10,10,0.95) 100%);
@@ -521,7 +476,7 @@ Index · HTML
     opacity: 0; transition: opacity 0.4s;
   }
   .work-item:hover .work-overlay { opacity: 1; }
- 
+
   .work-title {
     font-family: 'DM Serif Display', serif;
     font-size: 1.5rem; margin-bottom: 0.5rem;
@@ -542,7 +497,7 @@ Index · HTML
     transition: color 0.3s, border-color 0.3s;
   }
   .work-link:hover { color: var(--gold); border-color: var(--gold); }
- 
+
   /* CONTACT */
   #contact {
     padding: 10rem 4rem;
@@ -553,12 +508,12 @@ Index · HTML
     content: ''; position: absolute; top: 0; left: 0; right: 0;
     height: 1px; background: var(--line);
   }
- 
+
   .contact-inner {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 8rem; max-width: 1200px; margin: 0 auto;
   }
- 
+
   .contact-info-item {
     display: flex; align-items: center; gap: 1rem;
     padding: 1.25rem 0;
@@ -576,7 +531,7 @@ Index · HTML
   .contact-info-value { font-size: 0.95rem; color: var(--text); margin-top: 0.2rem; }
   .contact-info-value a { color: inherit; text-decoration: none; transition: color 0.3s; }
   .contact-info-value a:hover { color: var(--gold); }
- 
+
   .contact-social { margin-top: 3rem; display: flex; gap: 1rem; }
   .social-btn {
     width: 44px; height: 44px;
@@ -586,7 +541,7 @@ Index · HTML
     transition: all 0.3s;
   }
   .social-btn:hover { border-color: var(--gold); color: var(--gold); }
- 
+
   .cv-download {
     margin-top: 2.5rem;
     display: inline-flex; align-items: center; gap: 0.75rem;
@@ -599,7 +554,7 @@ Index · HTML
     font-family: 'DM Sans', sans-serif; font-weight: 400;
   }
   .cv-download:hover { border-color: var(--gold); color: var(--gold); }
- 
+
   /* Form */
   .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
   .form-group { position: relative; }
@@ -616,12 +571,12 @@ Index · HTML
   .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
   .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
   .form-group textarea { height: 160px; }
- 
+
   .form-submit {
     display: flex; align-items: center; justify-content: space-between;
     gap: 1rem;
   }
- 
+
   .btn-submit {
     display: inline-flex; align-items: center; gap: 0.75rem;
     background: var(--gold); color: var(--bg);
@@ -633,13 +588,13 @@ Index · HTML
     clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
   }
   .btn-submit:hover { background: var(--gold2); transform: translate(-2px, -2px); }
- 
+
   #form-msg {
     font-size: 0.8rem; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--gold);
     font-family: 'Space Mono', monospace;
   }
- 
+
   /* FOOTER */
   footer {
     padding: 3rem 4rem;
@@ -652,7 +607,7 @@ Index · HTML
     font-family: 'Space Mono', monospace;
   }
   footer a { color: var(--gold); text-decoration: none; }
- 
+
   /* LIGHT THEME */
   body.light {
     --bg: #f5f2ee;
@@ -664,7 +619,7 @@ Index · HTML
     --line: rgba(26,24,20,0.08);
     --line2: rgba(26,24,20,0.15);
   }
- 
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
@@ -674,7 +629,7 @@ Index · HTML
     0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
   }
- 
+
   .reveal {
     opacity: 0; transform: translateY(40px);
     transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -685,7 +640,7 @@ Index · HTML
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
- 
+
   /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 1.5rem 2rem; }
@@ -704,10 +659,10 @@ Index · HTML
 </style>
 </head>
 <body>
- 
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
- 
+
 <!-- NAV -->
 <nav id="navbar">
   <a href="#hero" class="nav-logo">B<span>.</span>Kareł</a>
@@ -721,13 +676,13 @@ Index · HTML
     <button class="theme-btn" id="themeBtn">☀ Jasny</button>
   </div>
 </nav>
- 
+
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-num">BK</div>
- 
+
   <div class="hero-tag">Portfolio — 2025</div>
   <h1 class="hero-title">
     Bartosz<br>
@@ -743,13 +698,13 @@ Index · HTML
     </a>
     <a href="#contact" class="btn-ghost">Skontaktuj się</a>
   </div>
- 
+
   <div class="hero-scroll">
     <span>Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
- 
+
 <!-- ABOUT -->
 <div class="section-divider reveal"><span>01 — O mnie</span></div>
 <section id="about">
@@ -762,7 +717,7 @@ Index · HTML
         </div>
       </div>
       <div class="about-img-tag">Wrocław, PL</div>
- 
+
       <div class="stats-row">
         <div class="stat-item">
           <span class="stat-num">UEW</span>
@@ -778,21 +733,21 @@ Index · HTML
         </div>
       </div>
     </div>
- 
+
     <div class="about-content reveal reveal-delay-2">
       <span class="section-label">Kim jestem</span>
       <h2 class="section-title">Pasja do <em>analizy</em> i technologii</h2>
       <p class="about-text">
         Jestem studentem Uniwersytetu Ekonomicznego we Wrocławiu, z pasją do analizy danych, rachunkowości i nowoczesnych technologii. Łączę wiedzę ekonomiczną z umiejętnościami technicznymi, aby tworzyć wartościowe rozwiązania biznesowe.
       </p>
- 
+
       <div class="tabs">
         <div class="tab-nav">
           <button class="tab-btn active" onclick="openTab(event,'skills')">Umiejętności</button>
           <button class="tab-btn" onclick="openTab(event,'experience')">Doświadczenie</button>
           <button class="tab-btn" onclick="openTab(event,'education')">Edukacja</button>
         </div>
- 
+
         <div class="tab-pane active" id="skills">
           <ul>
             <li>
@@ -809,7 +764,7 @@ Index · HTML
             </li>
           </ul>
         </div>
- 
+
         <div class="tab-pane" id="experience">
           <ul>
             <li>
@@ -829,7 +784,7 @@ Index · HTML
             </li>
           </ul>
         </div>
- 
+
         <div class="tab-pane" id="education">
           <ul>
             <li>
@@ -853,7 +808,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <!-- SERVICES -->
 <div class="section-divider reveal"><span>02 — Usługi</span></div>
 <section id="services">
@@ -866,7 +821,7 @@ Index · HTML
       Łączę kompetencje analityczne z umiejętnościami technicznymi, oferując kompleksowe wsparcie w obszarze biznesu i danych.
     </p>
   </div>
- 
+
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-num">01</div>
@@ -878,7 +833,7 @@ Index · HTML
       <h3 class="service-title">Analityk Biznesowy</h3>
       <p class="service-text">Analiza procesów biznesowych, modelowanie danych, tworzenie raportów i dashboardów w Power BI. Wsparcie w podejmowaniu decyzji opartych na danych.</p>
     </div>
- 
+
     <div class="service-card reveal reveal-delay-2">
       <div class="service-num">02</div>
       <div class="service-icon">
@@ -891,7 +846,7 @@ Index · HTML
       <h3 class="service-title">Rachunkowość i Finanse</h3>
       <p class="service-text">Rozliczenia, sprawozdawczość finansowa, analiza kosztów i rentowności. Wsparcie w planowaniu budżetów i kontroli finansowej przedsiębiorstw.</p>
     </div>
- 
+
     <div class="service-card reveal reveal-delay-3">
       <div class="service-num">03</div>
       <div class="service-icon">
@@ -904,7 +859,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <!-- PORTFOLIO -->
 <div class="section-divider reveal"><span>03 — Portfolio</span></div>
 <section id="portfolio">
@@ -915,7 +870,7 @@ Index · HTML
     </div>
     <a href="#contact" class="btn-ghost reveal reveal-delay-2">Wszystkie projekty</a>
   </div>
- 
+
   <div class="portfolio-grid">
     <div class="work-item reveal">
       <div class="work-img">
@@ -935,7 +890,7 @@ Index · HTML
         </a>
       </div>
     </div>
- 
+
     <div class="work-item reveal reveal-delay-2">
       <div class="work-img">
         <div class="work-img-placeholder">
@@ -955,7 +910,7 @@ Index · HTML
         </a>
       </div>
     </div>
- 
+
     <div class="work-item reveal reveal-delay-3">
       <div class="work-img">
         <div class="work-img-placeholder">
@@ -975,7 +930,7 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <!-- CONTACT -->
 <div class="section-divider reveal"><span>04 — Kontakt</span></div>
 <section id="contact">
@@ -983,7 +938,7 @@ Index · HTML
     <div class="reveal">
       <span class="section-label">Skontaktuj się</span>
       <h2 class="section-title">Porozmawiajmy o <em>projekcie</em></h2>
- 
+
       <div style="margin-top: 3rem;">
         <div class="contact-info-item">
           <div class="contact-info-icon">
@@ -1013,13 +968,13 @@ Index · HTML
           </div>
         </div>
       </div>
- 
+
       <a href="#" download class="cv-download" style="margin-top: 2.5rem; display: inline-flex; align-items: center; gap: 0.75rem;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Pobierz CV
       </a>
     </div>
- 
+
     <div class="reveal reveal-delay-2">
       <form class="contact-form" name="submit-to-google-sheet" onsubmit="handleSubmit(event)">
         <div class="form-group">
@@ -1042,13 +997,13 @@ Index · HTML
     </div>
   </div>
 </section>
- 
+
 <!-- FOOTER -->
 <footer>
   <p>© 2025 Bartosz Kareł — Wszelkie prawa zastrzeżone</p>
   <p>Wrocław, <a href="https://www.ue.wroc.pl" target="_blank">UEW</a></p>
 </footer>
- 
+
 <script>
   // Cursor
   const cursor = document.getElementById('cursor');
@@ -1068,20 +1023,20 @@ Index · HTML
     requestAnimationFrame(animRing);
   }
   animRing();
- 
+
   // Nav scroll
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 50);
   });
- 
+
   // Theme
   const themeBtn = document.getElementById('themeBtn');
   themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('light');
     themeBtn.textContent = document.body.classList.contains('light') ? '☾ Ciemny' : '☀ Jasny';
   });
- 
+
   // Tabs
   function openTab(e, name) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1089,14 +1044,14 @@ Index · HTML
     e.currentTarget.classList.add('active');
     document.getElementById(name).classList.add('active');
   }
- 
+
   // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.12 });
   reveals.forEach(r => observer.observe(r));
- 
+
   // Form
   function handleSubmit(e) {
     e.preventDefault();
@@ -1118,4 +1073,3 @@ Index · HTML
 </script>
 </body>
 </html>
- 
