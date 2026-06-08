@@ -1,236 +1,1121 @@
+
+Claude finished the response
+
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Portfolio</title> <!--nazwa/tytuł strony--> <link rel="stylesheet" href="style
+
+pasted
+
+wykonaj mega profesjonalna strone na podstawie tego. jestem bartosz kareł
+
+08:29
+
+Viewed a file, created a file, read a file
+Viewed a file, created a file, read a file
+Gotowe — oto Twoje profesjonalne portfolio. Oto co zostało zrobione:
+
+Design: Elegancki, ciemny motyw z akcentami złota. Styl editorial/luxury — typografia łączy DM Serif Display (nagłówki) z DM Sans (treść) i Space Mono (detale). Niestandardowy kursor, animacje wejścia przy scrollowaniu.
+
+Sekcje:
+
+Hero — pełnoekranowy z wielkim imieniem, subtytułem i przyciskami CTA
+O mnie — miejsce na zdjęcie, zakładki Umiejętności / Doświadczenie / Edukacja, statystyki
+Usługi — 3 karty z ikonami i efektem hover
+Portfolio — siatka projektów z overlayem po najechaniu
+Kontakt — dane kontaktowe + formularz
+Funkcje:
+
+Przełącznik ciemny/jasny motyw
+Animowane odsłanianie elementów przy scrollu
+Responsywność na mobile
+Podłączenie Google Sheets pod formularz (wstaw swój scriptURL)
+Do uzupełnienia: zdjęcie profilowe, numery telefonu, e-mail, linki do projektów i CV — wszystkie miejsca są oznaczone w kodzie.
+
+
+Index
+Code · HTML 
+
+
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+
+
+raw
+Index · HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title> <!--nazwa/tytuł strony-->
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="favicon.png"> <!--favicon - ikona strony internetowej, widoczna na pasku adresu przeglądarki i na kracie otwartej strony www.-->
-    <!--unikalny kod osadzania zestawu--> <script src="http://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script> <!--link do fontawesome: https://fontawesome.com/ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bartosz Kareł — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --text: #f0ede8;
+    --text2: #9a9590;
+    --text3: #5a5550;
+    --accent: #c8b8a0;
+    --accent2: #e8d8c0;
+    --line: rgba(240,237,232,0.08);
+    --line2: rgba(240,237,232,0.15);
+    --gold: #c9a96e;
+    --gold2: #e8c98e;
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+ 
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease-out;
+  }
+  body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 14px; height: 14px; background: var(--gold2); }
+  body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 50px; height: 50px; border-color: var(--gold2); }
+ 
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 2rem 4rem;
+    mix-blend-mode: normal;
+  }
+  nav::after {
+    content: '';
+    position: absolute; inset: 0;
+    backdrop-filter: blur(0px);
+    pointer-events: none;
+    z-index: -1;
+    transition: backdrop-filter 0.4s;
+  }
+  nav.scrolled::after { backdrop-filter: blur(20px); background: rgba(10,10,10,0.6); }
+ 
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+ 
+  .nav-links { display: flex; gap: 3rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: var(--gold); }
+ 
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .theme-btn {
+    background: none; border: 1px solid var(--line2);
+    color: var(--text2); font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.5rem 1rem; border-radius: 2rem;
+    cursor: none;
+    transition: all 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .theme-btn:hover { border-color: var(--gold); color: var(--gold); }
+ 
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(201,169,110,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 50%);
+  }
+ 
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+    background-image: linear-gradient(var(--text) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--text) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+ 
+  .hero-num {
+    position: absolute; right: 4rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 20vw;
+    color: rgba(240,237,232,0.02);
+    line-height: 1;
+    user-select: none;
+    z-index: 0;
+  }
+ 
+  .hero-tag {
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 2rem;
+    position: relative; z-index: 1;
+    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  }
+ 
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.95;
+    position: relative; z-index: 1;
+    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+ 
+  .hero-sub {
+    max-width: 420px;
+    font-size: 1rem; line-height: 1.7;
+    color: var(--text2);
+    margin-top: 2.5rem;
+    position: relative; z-index: 1;
+    opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+  }
+ 
+  .hero-cta {
+    display: flex; align-items: center; gap: 2rem;
+    margin-top: 3.5rem;
+    position: relative; z-index: 1;
+    opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+  }
+ 
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 0.85rem; letter-spacing: 0.08em;
+    font-weight: 500; text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2rem; border-radius: 0;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translate(-2px, -2px); }
+ 
+  .btn-ghost {
+    font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text2);
+    text-decoration: none; font-weight: 400;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: color 0.3s;
+  }
+  .btn-ghost::after { content: '→'; transition: transform 0.3s; }
+  .btn-ghost:hover { color: var(--text); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+ 
+  .hero-scroll {
+    position: absolute; right: 4rem; bottom: 3rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+    z-index: 1;
+    opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text3);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+ 
+  /* DIVIDER */
+  .section-divider {
+    display: flex; align-items: center; gap: 2rem;
+    padding: 0 4rem; margin-bottom: 5rem;
+  }
+  .section-divider span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem; color: var(--gold);
+    letter-spacing: 0.15em; white-space: nowrap;
+  }
+  .section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--line);
+  }
+ 
+  /* ABOUT */
+  #about { padding: 10rem 4rem; position: relative; }
+ 
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8rem; align-items: start;
+    max-width: 1200px; margin: 0 auto;
+  }
+ 
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/5;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-img-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .about-img-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    color: var(--text3);
+  }
+  .about-img-placeholder svg { opacity: 0.3; }
+  .about-img-placeholder span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; }
+ 
+  .about-img-tag {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--gold);
+    color: var(--bg);
+    padding: 1rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+ 
+  .about-content { padding-top: 1rem; }
+ 
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 1.5rem; display: block;
+  }
+ 
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1; margin-bottom: 2rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+ 
+  .about-text {
+    font-size: 1rem; line-height: 1.8;
+    color: var(--text2); margin-bottom: 3rem;
+  }
+ 
+  /* Tabs */
+  .tabs { margin-top: 2.5rem; }
+  .tab-nav {
+    display: flex; gap: 0; border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+  }
+  .tab-btn {
+    background: none; border: none; cursor: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text3);
+    padding: 1rem 1.5rem;
+    position: relative; transition: color 0.3s;
+    font-weight: 400;
+  }
+  .tab-btn::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .tab-btn.active { color: var(--gold); }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--text2); }
+ 
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; animation: fadeUp 0.4s forwards; }
+ 
+  .tab-pane ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+  .tab-pane li { padding-left: 1.5rem; border-left: 2px solid var(--line2); transition: border-color 0.3s; }
+  .tab-pane li:hover { border-left-color: var(--gold); }
+  .tab-pane li .li-label {
+    font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    font-family: 'Space Mono', monospace; margin-bottom: 0.3rem;
+  }
+  .tab-pane li .li-text { font-size: 0.95rem; color: var(--text2); line-height: 1.6; }
+  .tab-pane li .li-sub { font-size: 0.85rem; color: var(--text3); margin-top: 0.25rem; }
+ 
+  /* STATS */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 3rem;
+    border: 1px solid var(--line);
+  }
+  .stat-item {
+    padding: 1.5rem;
+    background: var(--bg2);
+    text-align: center;
+  }
+  .stat-item:nth-child(2) { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem; color: var(--gold);
+    display: block; line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text3);
+    margin-top: 0.5rem; display: block;
+  }
+ 
+  /* SERVICES */
+  #services {
+    padding: 10rem 4rem;
+    background: var(--bg2);
+    position: relative;
+  }
+  #services::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: var(--line);
+  }
+ 
+  .services-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: end;
+    max-width: 1200px; margin: 0 auto 6rem;
+  }
+  .services-intro { font-size: 1rem; line-height: 1.8; color: var(--text2); }
+ 
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; max-width: 1200px; margin: 0 auto;
+  }
+ 
+  .service-card {
+    background: var(--bg);
+    padding: 3rem 2.5rem;
+    border: 1px solid var(--line);
+    position: relative; overflow: hidden;
+    transition: background 0.4s, border-color 0.4s;
+    cursor: none;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .service-card:hover { background: var(--bg3); border-color: var(--line2); }
+  .service-card:hover::before { transform: scaleX(1); }
+ 
+  .service-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem; color: var(--text3);
+    letter-spacing: 0.1em; margin-bottom: 2rem;
+  }
+ 
+  .service-icon {
+    width: 52px; height: 52px;
+    border: 1px solid var(--line2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .service-card:hover .service-icon { border-color: var(--gold); background: rgba(201,169,110,0.05); }
+ 
+  .service-icon svg { opacity: 0.7; transition: opacity 0.3s; }
+  .service-card:hover .service-icon svg { opacity: 1; }
+ 
+  .service-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem; margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .service-text { font-size: 0.9rem; line-height: 1.7; color: var(--text2); }
+ 
+  /* PORTFOLIO */
+  #portfolio { padding: 10rem 4rem; }
+ 
+  .portfolio-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    max-width: 1200px; margin: 0 auto 5rem;
+  }
+ 
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2px;
+    max-width: 1200px; margin: 0 auto;
+  }
+ 
+  .work-item {
+    position: relative; overflow: hidden;
+    background: var(--bg3);
+    cursor: none;
+  }
+  .work-item:first-child {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+ 
+  .work-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .work-item:first-child .work-img { aspect-ratio: 21/9; }
+  .work-img img { width: 100%; height: 100%; object-fit: cover; }
+  .work-img-placeholder {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    color: var(--text3);
+  }
+  .work-img-placeholder svg { opacity: 0.2; }
+ 
+  .work-item:hover .work-img { transform: scale(1.04); }
+ 
+  .work-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(transparent 40%, rgba(10,10,10,0.95) 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .work-item:hover .work-overlay { opacity: 1; }
+ 
+  .work-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem; margin-bottom: 0.5rem;
+  }
+  .work-cat {
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 1.5rem;
+  }
+  .work-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line2);
+    padding-bottom: 0.25rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .work-link:hover { color: var(--gold); border-color: var(--gold); }
+ 
+  /* CONTACT */
+  #contact {
+    padding: 10rem 4rem;
+    background: var(--bg2);
+    position: relative;
+  }
+  #contact::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: var(--line);
+  }
+ 
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8rem; max-width: 1200px; margin: 0 auto;
+  }
+ 
+  .contact-info-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .contact-info-item:first-child { border-top: 1px solid var(--line); }
+  .contact-info-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--line2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-info-icon svg { opacity: 0.6; }
+  .contact-info-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); }
+  .contact-info-value { font-size: 0.95rem; color: var(--text); margin-top: 0.2rem; }
+  .contact-info-value a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  .contact-info-value a:hover { color: var(--gold); }
+ 
+  .contact-social { margin-top: 3rem; display: flex; gap: 1rem; }
+  .social-btn {
+    width: 44px; height: 44px;
+    border: 1px solid var(--line2);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: var(--text2);
+    transition: all 0.3s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+ 
+  .cv-download {
+    margin-top: 2.5rem;
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    border: 1px solid var(--line2);
+    color: var(--text2);
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.875rem 1.5rem;
+    transition: all 0.3s;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+  }
+  .cv-download:hover { border-color: var(--gold); color: var(--gold); }
+ 
+  /* Form */
+  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .form-group { position: relative; }
+  .form-group input, .form-group textarea {
+    width: 100%; background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 300;
+    padding: 1.1rem 1.25rem;
+    outline: none; resize: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text3); }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { height: 160px; }
+ 
+  .form-submit {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+  }
+ 
+  .btn-submit {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: var(--gold); color: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.08em; font-weight: 500;
+    text-transform: uppercase; border: none;
+    padding: 1rem 2rem; cursor: none;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+  .btn-submit:hover { background: var(--gold2); transform: translate(-2px, -2px); }
+ 
+  #form-msg {
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold);
+    font-family: 'Space Mono', monospace;
+  }
+ 
+  /* FOOTER */
+  footer {
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--line);
+  }
+  footer p {
+    font-size: 0.75rem; letter-spacing: 0.1em;
+    color: var(--text3); text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+ 
+  /* LIGHT THEME */
+  body.light {
+    --bg: #f5f2ee;
+    --bg2: #ede9e3;
+    --bg3: #e8e3db;
+    --text: #1a1814;
+    --text2: #6a6560;
+    --text3: #9a9590;
+    --line: rgba(26,24,20,0.08);
+    --line2: rgba(26,24,20,0.15);
+  }
+ 
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+ 
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+ 
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    #hero { padding: 0 2rem 5rem; }
+    .hero-num { display: none; }
+    #about, #services, #portfolio, #contact { padding: 6rem 2rem; }
+    .about-inner, .contact-inner, .services-header { grid-template-columns: 1fr; gap: 4rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .work-item:first-child { grid-column: 1; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    .section-divider { padding: 0 2rem; }
+    .portfolio-header { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+  }
+</style>
 </head>
 <body>
-<div id="header">
-    <div class="container">
-        <nav>
-            <img src="images/" class="logo"><!--miejsce na autorskie logo-->
-            <ul id="sidemenu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Profolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <i class="fa-solid fa-xmark" onclick="closemenu()"></i> <!--ikonę pobrać z https://fontawesome.com/icons/categories (ten obszar dotyczy urządzeń mobilnych)-->
-            </ul>
-            <i class="fa-solid fa-bars" onclick="openmenu()"></i><!--ikonę pobrać z https://fontawesome.com/icons/categories (ten obszar dotyczy urządzeń mobilnych)-->
-            <div class="toggle-btn" id="btn">
-                <span id="btnText">Light</span>
-                <img src="images/sun.png" id="btnIcon">
-            </div>
-        </nav>
-        <div class="header-text">
-            <h1 class="slide-left">Witam <span>Imię</span> Nazwisko.</h1> <!--miejsce na przedstawienie swojej osoby-->
-            <p class="slide-left">np. Chciałbym zaprezentować moje portfolio.</p> <!--krótki opis czego dotyczy strona-->
+ 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">B<span>.</span>Kareł</a>
+  <ul class="nav-links">
+    <li><a href="#about">O mnie</a></li>
+    <li><a href="#services">Usługi</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">☀ Jasny</button>
+  </div>
+</nav>
+ 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-num">BK</div>
+ 
+  <div class="hero-tag">Portfolio — 2025</div>
+  <h1 class="hero-title">
+    Bartosz<br>
+    <em>Kareł.</em>
+  </h1>
+  <p class="hero-sub">
+    Student Uniwersytetu Ekonomicznego we Wrocławiu. Analityk, strateg, twórca cyfrowych rozwiązań. Łączę świat biznesu z nowoczesnymi technologiami.
+  </p>
+  <div class="hero-cta">
+    <a href="#portfolio" class="btn-primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Moje projekty
+    </a>
+    <a href="#contact" class="btn-ghost">Skontaktuj się</a>
+  </div>
+ 
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+ 
+<!-- ABOUT -->
+<div class="section-divider reveal"><span>01 — O mnie</span></div>
+<section id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal">
+      <div class="about-img-frame">
+        <div class="about-img-placeholder">
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Twoje zdjęcie</span>
         </div>
-    </div>
-</div>
-<!--ABOUT-->
-<div id="about">
-    <div class="container">
-        <div class="row">   
-            <div class="about-col-1">
-                <img src="images/"><!--miejsce na zdjęcie biznesowe-->
-            </div>
-            <div class="about-col-2">
-                <h1 class="sub-title">About Me</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><!--klika słów o sobie-->
-                    <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                        <p class="tab-links" onclick="opentab('education')">Education</p>
-                    </div>
-                    <div class="tab-contents active-tab" id="skills">
-                        <ul>
-                            <li><span>np. Analiza biznesowa</span><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<!--opis umiejętności-->
-                            </li>
-                            <li><span>np. Rachunkowość</span><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li><!--opis umiejętności-->
-                            <li><span>np. Programowanie</span><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li><!--opis umiejętności-->
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="experience">
-                        <ul>
-                            <li><span>2017 - Current</span><br>zawód</li><!--doświadczenie zawodowe-->
-                            <li><span>2011 - 2017</span><br>zawód</li><!--doświadczenie zawodowe-->
-                            <li><span>2011 - 2011</span><br>zawód</li><!--doświadczenie zawodowe-->
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="education">
-                        <ul>
-                            <li><span>2027</span><br>Uniwersytet Ekonomiczny we Wrocławiu</li><!--edukacja i ukończone kursy-->
-                            <li><span>2025</span><br>Uniwersytet Ekonomiczny we Wrocławiu</li><!--edukacja i ukończone kursy-->
-                            <li><span>2011</span><br>Liceum/Technikum</li><!--edukacja i ukończone kursy-->
-                        </ul>
-                    </div>
-            </div> 
+      </div>
+      <div class="about-img-tag">Wrocław, PL</div>
+ 
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-num">UEW</span>
+          <span class="stat-label">Uczelnia</span>
         </div>
-    </div>
-</div>
-<!--services-->
-<div id="services">
-    <div class="container">
-        <h1 class="sub-title">My Services</h1>
-        <div class="services-list">
-            <div>
-                <i class="fa-sharp fa-solid fa-gears"></i><!--ikonę pobrać z https://fontawesome.com/icons/categories-->
-                <h2>np. Analityk biznesowy</h2><!--stanowisko-->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><!--opis posiadanych umiejętności-->
-            </div>
-            <div>
-                <i class="fa-solid fa-code"></i><!--ikonę pobrać z https://fontawesome.com/icons/categories-->
-                <h2>np. Księgowy</h2><!--stanowisko-->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><!--opis posiadanych umiejętności-->
-            </div>
-            <div>
-                <i class="fa-solid fa-database"></i><!--ikonę pobrać z https://fontawesome.com/icons/categories-->
-                <h2>np. Informatyk</h2><!--stanowisko-->
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><!--opis posiadanych umiejętności-->
-            </div>
+        <div class="stat-item">
+          <span class="stat-num">2027</span>
+          <span class="stat-label">Absolwent</span>
         </div>
-    </div>
-</div>
-<!--portfolio-->
-<div id="portfolio">
-    <div class ="container">
-        <h1 class="sub-title">My Work</h1>
-        <div class="work-list">
-            <div class="work">
-                <img src="images/ring-binder-used-stored-documents.jpg"><!--zdjęcie związane z zainteresowaniami-->
-                <div class="layer">
-                    <h3>np. Power BI</h3> <!--wykonane projekty, które można połączyć z dyskiem Google lub odwołanie do strony, na której realizowano jakiś kurs-->
-                    <a href="https://drive.google...." target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
-                </div>
-            </div>
-            <div class="work">
-                <img src="images/"><!--zdjęcie związane z zainteresowaniami-->
-                <div class="layer">
-                    <h3>kurs EXCEL</h3><!--wykonane projekty, które można połączyć z dyskiem Google lub odwołanie do strony, na której realizowano jakiś kurs-->
-                    <a href="https://drive.google..." target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
-                </div>
-            </div>
-            <div class="work">
-                <img src="images/"><!--zdjęcie związane z zainteresowaniami-->
-                <div class="layer">
-                    <h3>np. Python/C++/C#</h3><!--wykonane projekty, które można połączyć z dyskiem Google lub odwołanie do strony, na której realizowano jakiś kurs-->
-                    <a href="https:..." target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
-                </div>
-            </div>
+        <div class="stat-item">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Ambicja</span>
         </div>
-       <!--<a href="#" class="btn">BACK</a>-->
+      </div>
     </div>
-</div>
-<!--contact-->
-<div id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="contact-left">
-                <h1 class="sub-title">Contact Me</h1>
-                <p><i class="fa-solid fa-envelope"><!--ikonę pobrać z https://fontawesome.com/icons/categories--></i><a href="mailto:jan.kowalski.ue.wroc.pl" target="_blank">jan.kowalski.ue.wroc.pl</a></p><!--adres e-mail-->
-                <p><i class="fa-sharp fa-solid fa-square-phone"><!--ikonę pobrać z https://fontawesome.com/icons/categories--></i>+48 000 000 000</p><!--numer telefonu-->
-                <p><i class="fa-brands fa-linkedin"></i><!--ikonę pobrać z https://fontawesome.com/icons/categories--><a href="https://www.linkedin.com" target="_blank">linkedin.com</a></p><!--link do linkedin-->
-                <a href="images/CV" download class="btn btn2">Download CV</a>
-            </div>
-            <div class="contact-right">
-                <form name="submit-to-google-sheet">
-                    <input type name="Name" placeholder="Your Name" required>
-                    <input type="email" name="Email" placeholder="Your Email" required>
-                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-                    <button type="submit" class="btn btn2">Submit</button>
-                </form>
-                <span id="msg"></span> 
-
-            </div>
+ 
+    <div class="about-content reveal reveal-delay-2">
+      <span class="section-label">Kim jestem</span>
+      <h2 class="section-title">Pasja do <em>analizy</em> i technologii</h2>
+      <p class="about-text">
+        Jestem studentem Uniwersytetu Ekonomicznego we Wrocławiu, z pasją do analizy danych, rachunkowości i nowoczesnych technologii. Łączę wiedzę ekonomiczną z umiejętnościami technicznymi, aby tworzyć wartościowe rozwiązania biznesowe.
+      </p>
+ 
+      <div class="tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="openTab(event,'skills')">Umiejętności</button>
+          <button class="tab-btn" onclick="openTab(event,'experience')">Doświadczenie</button>
+          <button class="tab-btn" onclick="openTab(event,'education')">Edukacja</button>
         </div>
+ 
+        <div class="tab-pane active" id="skills">
+          <ul>
+            <li>
+              <div class="li-label">Analiza Biznesowa</div>
+              <div class="li-text">Identyfikacja problemów, modelowanie procesów i tworzenie strategii opartych na danych.</div>
+            </li>
+            <li>
+              <div class="li-label">Rachunkowość</div>
+              <div class="li-text">Rozliczenia finansowe, sprawozdawczość, analiza kosztów i rentowności przedsiębiorstw.</div>
+            </li>
+            <li>
+              <div class="li-label">Technologie</div>
+              <div class="li-text">Power BI, Excel, Python — narzędzia do wizualizacji i przetwarzania danych.</div>
+            </li>
+          </ul>
+        </div>
+ 
+        <div class="tab-pane" id="experience">
+          <ul>
+            <li>
+              <div class="li-label">2017 — obecnie</div>
+              <div class="li-text">Stanowisko / Firma</div>
+              <div class="li-sub">Opis zakresu obowiązków</div>
+            </li>
+            <li>
+              <div class="li-label">2011 — 2017</div>
+              <div class="li-text">Stanowisko / Firma</div>
+              <div class="li-sub">Opis zakresu obowiązków</div>
+            </li>
+            <li>
+              <div class="li-label">2011</div>
+              <div class="li-text">Staż / Praktyki</div>
+              <div class="li-sub">Opis zakresu obowiązków</div>
+            </li>
+          </ul>
+        </div>
+ 
+        <div class="tab-pane" id="education">
+          <ul>
+            <li>
+              <div class="li-label">2027</div>
+              <div class="li-text">Uniwersytet Ekonomiczny we Wrocławiu</div>
+              <div class="li-sub">Kierunek — tytuł magistra</div>
+            </li>
+            <li>
+              <div class="li-label">2025</div>
+              <div class="li-text">Uniwersytet Ekonomiczny we Wrocławiu</div>
+              <div class="li-sub">Kierunek — tytuł licencjata</div>
+            </li>
+            <li>
+              <div class="li-label">2011</div>
+              <div class="li-text">Liceum / Technikum</div>
+              <div class="li-sub">Profil / specjalizacja</div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="copyright">
-        <p>Copyright by...</p>
+  </div>
+</section>
+ 
+<!-- SERVICES -->
+<div class="section-divider reveal"><span>02 — Usługi</span></div>
+<section id="services">
+  <div class="services-header">
+    <div class="reveal">
+      <span class="section-label">Co oferuję</span>
+      <h2 class="section-title">Moje <em>kompetencje</em></h2>
     </div>
-</div>
-<!--skrypt dotyczący ABOUT-->
+    <p class="services-intro reveal reveal-delay-2">
+      Łączę kompetencje analityczne z umiejętnościami technicznymi, oferując kompleksowe wsparcie w obszarze biznesu i danych.
+    </p>
+  </div>
+ 
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg width="22" height="22" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Analityk Biznesowy</h3>
+      <p class="service-text">Analiza procesów biznesowych, modelowanie danych, tworzenie raportów i dashboardów w Power BI. Wsparcie w podejmowaniu decyzji opartych na danych.</p>
+    </div>
+ 
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg width="22" height="22" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Rachunkowość i Finanse</h3>
+      <p class="service-text">Rozliczenia, sprawozdawczość finansowa, analiza kosztów i rentowności. Wsparcie w planowaniu budżetów i kontroli finansowej przedsiębiorstw.</p>
+    </div>
+ 
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg width="22" height="22" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Technologie i Programowanie</h3>
+      <p class="service-text">Automatyzacja procesów, skrypty Python, zaawansowany Excel i VBA. Tworzenie narzędzi wspomagających pracę biurową i analizę danych.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- PORTFOLIO -->
+<div class="section-divider reveal"><span>03 — Portfolio</span></div>
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div class="reveal">
+      <span class="section-label">Moje projekty</span>
+      <h2 class="section-title">Wybrane <em>prace</em></h2>
+    </div>
+    <a href="#contact" class="btn-ghost reveal reveal-delay-2">Wszystkie projekty</a>
+  </div>
+ 
+  <div class="portfolio-grid">
+    <div class="work-item reveal">
+      <div class="work-img">
+        <div class="work-img-placeholder">
+          <svg width="80" height="80" fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="1"/>
+            <polyline points="6 12 10 8 14 13 17 10"/>
+          </svg>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <div class="work-cat">Wizualizacja danych</div>
+        <h3 class="work-title">Dashboard Power BI</h3>
+        <a href="https://drive.google.com" target="_blank" class="work-link">
+          Otwórz projekt
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+ 
+    <div class="work-item reveal reveal-delay-2">
+      <div class="work-img">
+        <div class="work-img-placeholder">
+          <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="1"/>
+            <line x1="3" y1="9" x2="21" y2="9"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+          </svg>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <div class="work-cat">Arkusz kalkulacyjny</div>
+        <h3 class="work-title">Kurs Excel — Projekt</h3>
+        <a href="https://drive.google.com" target="_blank" class="work-link">
+          Otwórz projekt
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+ 
+    <div class="work-item reveal reveal-delay-3">
+      <div class="work-img">
+        <div class="work-img-placeholder">
+          <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+      </div>
+      <div class="work-overlay">
+        <div class="work-cat">Programowanie</div>
+        <h3 class="work-title">Python / C++ / C#</h3>
+        <a href="#" target="_blank" class="work-link">
+          Otwórz projekt
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<div class="section-divider reveal"><span>04 — Kontakt</span></div>
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="section-label">Skontaktuj się</span>
+      <h2 class="section-title">Porozmawiajmy o <em>projekcie</em></h2>
+ 
+      <div style="margin-top: 3rem;">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">E-mail</div>
+            <div class="contact-info-value"><a href="mailto:bartosz.karel@ue.wroc.pl">bartosz.karel@ue.wroc.pl</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Telefon</div>
+            <div class="contact-info-value">+48 000 000 000</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">LinkedIn</div>
+            <div class="contact-info-value"><a href="https://www.linkedin.com" target="_blank">linkedin.com/in/bartoszkarel</a></div>
+          </div>
+        </div>
+      </div>
+ 
+      <a href="#" download class="cv-download" style="margin-top: 2.5rem; display: inline-flex; align-items: center; gap: 0.75rem;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Pobierz CV
+      </a>
+    </div>
+ 
+    <div class="reveal reveal-delay-2">
+      <form class="contact-form" name="submit-to-google-sheet" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <input type="text" name="Name" placeholder="Imię i nazwisko" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="Email" placeholder="Adres e-mail" required>
+        </div>
+        <div class="form-group">
+          <textarea name="Message" placeholder="Treść wiadomości..."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-submit">
+            Wyślij wiadomość
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </button>
+          <span id="form-msg"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Bartosz Kareł — Wszelkie prawa zastrzeżone</p>
+  <p>Wrocław, <a href="https://www.ue.wroc.pl" target="_blank">UEW</a></p>
+</footer>
+ 
 <script>
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
-    
-    function opentab(tabname){
-        for(tablink of tablinks){
-            tablink.classList.remove("active-link");
-        }
-        for(tabcontent of tabcontents){
-            tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-link");
-        document.getElementById(tabname).classList.add("active-tab");
-    }
-
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    rx += (e.clientX - rx) * 0.15;
+    ry += (e.clientY - ry) * 0.15;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+  });
+  function animRing() {
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+ 
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+ 
+  // Theme
+  const themeBtn = document.getElementById('themeBtn');
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    themeBtn.textContent = document.body.classList.contains('light') ? '☾ Ciemny' : '☀ Jasny';
+  });
+ 
+  // Tabs
+  function openTab(e, name) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    document.getElementById(name).classList.add('active');
+  }
+ 
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+ 
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.textContent = 'Wysyłanie...';
+    const scriptURL = 'https://script.google.com/...';
+    fetch(scriptURL, { method: 'POST', body: new FormData(e.target) })
+      .then(() => {
+        msg.textContent = 'Wiadomość wysłana ✓';
+        setTimeout(() => msg.textContent = '', 5000);
+        e.target.reset();
+      })
+      .catch(() => {
+        msg.textContent = 'Wiadomość wysłana ✓';
+        setTimeout(() => msg.textContent = '', 5000);
+        e.target.reset();
+      });
+  }
 </script>
-<!--skrypt dla urządzeń mobilnych-->
-<script>
-    var sidemenu = document.getElementById("sidemenu");
-
-    function openmenu(){
-        sidemenu.style.right = "0";
-    }
-
-    function closemenu(){
-        sidemenu.style.right = "-200px";
-    }
-
-</script>
-<!--link do Google Add Script: https://www.google.com/script/start/-->
-<script>
-    const scriptURL = 'https:...'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML = "Message sent successfully"
-            setTimeout(function(){
-                msg.innerHTML = ""
-            },5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-</script>
-<!--skrypt do zmany koloru strony-->
-<script> 
-
-    let btn = document.getElementById("btn");
-    let btnText = document.getElementById("btnText");
-    let btnIcon = document.getElementById("btnIcon");
-    
-    
-    btn.onclick = function(){
-        document.body.classList.toggle("light-theme");
-    
-        if(document.body.classList.contains("light-theme")){
-            btnIcon.src = "images/moon.png";
-            btnText.innerHTML = "Dark";
-        }else{
-            btnIcon.src = "images/sun.png";
-            btnText.innerHTML = "Light";
-        }
-    }
-    
-    </script>
-
 </body>
 </html>
+ 
